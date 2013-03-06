@@ -1,0 +1,1 @@
+./env/bin/python ./src/manage.py runserver --settings=djangofirsttouch.local_settings
