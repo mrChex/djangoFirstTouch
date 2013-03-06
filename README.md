@@ -3,7 +3,7 @@ djangoFirstTouch
 
 Этот проект создан для того что бы пощупать github, django, backbonejs и coffescript.
 
-Перед развертыванием нужно естановить virtualenv на ваш компьютер, в случае с ubuntu это:
+Перед развертыванием нужно постановить virtualenv на ваш компьютер, в случае с ubuntu это:
 ```
 $ sudo apt-get install python-virtualenv
 ```
@@ -23,7 +23,7 @@ $ source ./env/bin/activate
 <DFT> user:djangoFirstTouch$
 ```
 
-Для запуска проекта достаточно запустить:
+Для запуска проекта достаточно выполнить:
 ```
 ./run_dev.sh
 ```
