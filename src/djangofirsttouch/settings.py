@@ -51,7 +51,7 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 
-STATIC_ROOT = abspath('static/')
+# STATIC_ROOT = abspath('static/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
