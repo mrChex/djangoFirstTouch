@@ -71,9 +71,8 @@ SECRET_KEY = 'imk#-xc)&amp;@&amp;0ua+!-20a@9w7ssa*52q$08k*pfu%w#2dy=rskl'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django_jinja2.loaders.filesystem.Loader',
+    'django_jinja2.loaders.app_directories.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -98,17 +97,20 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    # django apps
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admin',
+
+    # reusable apps
+    "django_jinja2",
 )
+
+DEFAULT_JINJA2_TEMPLATE_EXTENSION = '.jinja'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
