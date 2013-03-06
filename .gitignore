@@ -6,3 +6,4 @@ env
 logs
 pids
 local_settings.py
+database.sqlite3
