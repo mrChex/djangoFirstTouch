@@ -5,5 +5,5 @@
 env
 logs
 pids
-local_settings.py
+src/djangofirsttouch/local_settings.py
 database.sqlite3
