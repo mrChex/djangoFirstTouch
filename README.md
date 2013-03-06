@@ -1,0 +1,4 @@
+djangoFirstTouch
+================
+
+Django first touch
