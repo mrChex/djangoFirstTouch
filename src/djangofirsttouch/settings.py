@@ -117,11 +117,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'registration',
-
 
     # reusable apps
     "django_jinja2",
+
+    # apps
+    'registration',
 )
 
 DEFAULT_JINJA2_TEMPLATE_EXTENSION = '.jinja'

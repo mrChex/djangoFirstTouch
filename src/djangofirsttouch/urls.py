@@ -6,7 +6,11 @@ from splash import views as splash_views
 
 urlpatterns = patterns('',
                        url(r'^$', splash_views.Splash.as_view()),
-
+                       (r'^accounts/', include('registration.urls')),
+                       #Uncomment the next line to enable the admin:
+                       #(r'^admin/', include(admin.site.urls)),
+                       url(r'^register/$', 'registration.views.register', {'form': RegistrationFormUniqueEmail}, name='registration_register'),
+                       url('', include('registration.urls')),
 )
 
 if settings.DEBUG:
@@ -17,13 +21,6 @@ if settings.DEBUG:
     urlpatterns += patterns('',
                             (r'^static/(?P<path>.*)$', 'django.views.static.serve',
                                 {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
-
-                            (r'^accounts/', include('registration.urls')),
-                            #Uncomment the next line to enable the admin:
-                            #(r'^admin/', include(admin.site.urls)),
-                            url(r'^register/$', 'registration.views.register', {'form': RegistrationFormUniqueEmail}, name='registration_register'),
-                            url('', include('registration.urls')),
-
                             )
 
 
