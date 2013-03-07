@@ -3,7 +3,7 @@ from django import forms as forms
 from django.contrib.auth import authenticate, login, logout
 
 
-class RegisterForm(models.Model):
+class RegistrationForm(models.Model):
     email = models.TextField(max_length = 50)
     username = models.TextField(max_length = 30)
     password = models.TextField(max_length = 50)
