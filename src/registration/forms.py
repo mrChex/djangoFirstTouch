@@ -8,4 +8,4 @@ class RegistrationForm(forms.Form):
     password = forms.CharField(label=(u'Password'), max_length = 50)
     fields = ["username", "password", "email"]
 
-reg = RegistrationForm()
+

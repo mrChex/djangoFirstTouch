@@ -1,29 +1,26 @@
 from django.shortcuts import render_to_response
 from registration.forms import RegistrationForm
+from django.http import HttpResponseRedirect
+from django.template import RequestContext
+from django import forms as forms
+from django.contrib.auth.forms import UserCreationForm
 
-def register(request, success_url=None,
-             form_class=RegistrationForm,
-             #form_class=RegistrationFormUniqueEmail,
-             profile_callback=None,
-             template_name='registration/registration_form.html',
-             extra_context=None):
+def form(request):
+    form = UserCreationForm()
+    return render_to_response('registration/registration_form.html', {'form': form})
 
-    if request.method == "POST":
-        uform = RegistrationForm(data = request.POST)
-        pform = RegistrationForm(data = request.POST)
-        eform = RegistrationForm(data = request.POST)
-        if uform.is_valid() and pform.is_valid() and eform.is_valid():
-            user = uform.save()
-            profile = pform.save(commit = False)
-            profile.user = user
-            profile.save()
-        else:
-            render_to_response("/")
+def register(request):
+    form = UserCreationForm()
 
-    return render_to_response("registration/registration_form.html", )
+    if request.method == 'POST':
+        data = request.POST.copy()
+        errors = form.get_validation_errors(data)
+        if not errors:
+            new_user = form.save(data)
+            return HttpResponseRedirect("/account/login")
+    else:
+        data, errors = {}, {}
 
-def index(request):
-    return render_to_response("index.html")
-
-def add_user(request):
-    return render_to_response("registration/registration_complete.html")
+    return render_to_response("registration/registration_complete.html", {
+        'form' : forms.FormWrapper(form, data, errors)
+    })
