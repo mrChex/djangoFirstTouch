@@ -13,6 +13,8 @@ def render_to(template=None):
                 return HttpResponseRedirect(output['redirect'])
 
             t = loader.get_template(template)
+
+            output['request'] = request
             return HttpResponse(t.render(RequestContext(request, output)))
 
         return wrapper

@@ -7,17 +7,18 @@ from djangofirsttouch.utils import render_to
 
 class Register(View):
 
-    @render_to("registration/registration_form.html")
+    @render_to("registration/registration_form.jinja")
     def get(self, request):
         form = UserCreationForm()
         return {'form': form}
 
-    @render_to("registration/registration_form.html")
+    @render_to("registration/registration_form.jinja")
     def post(self, request):
         form = UserCreationForm(request.POST.copy())
 
         if form.is_valid():
             form.save()
+
             return {"redirect": "/account/login"}
 
         return {'form' : form}

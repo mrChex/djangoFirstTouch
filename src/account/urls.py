@@ -2,9 +2,12 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import login, logout
 
+from account import views as login_views
+
 
 
 urlpatterns = patterns('',
-                       (r'^login/$',  login),
-                       (r'^logout/$', logout),
+                       (r'^login/$',  login_views.Login.as_view()),
+                       (r'^logout/$', login_views.Logout.as_view()),
+                       (r'^profile/', login_views.Profile.as_view())
                        )
