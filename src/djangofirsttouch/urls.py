@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -8-
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-#from registration.forms import RegistrationFormUniqueEmail
-from splash import views as splash_views
-from registration.forms import RegistrationForm
+
+from registration import views as registration_views
+
 
 urlpatterns = patterns('',
                        url(r'^$', 'djangofirsttouch.views.index'),
@@ -11,7 +11,7 @@ urlpatterns = patterns('',
                        (r'^account/', include('account.urls')),
                        #Uncomment the next line to enable the admin:
                        #(r'^admin/', include(admin.site.urls)),
-                       url(r'^account/register/$', 'registration.views.form'),# {'form': RegistrationFormUniqueEmail}, name='registration_register'),
+                       url(r'^register/$', registration_views.Register.as_view())
 )
 
 if settings.DEBUG:

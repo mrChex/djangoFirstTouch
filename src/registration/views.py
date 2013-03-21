@@ -1,26 +1,23 @@
-from django.shortcuts import render_to_response
-from registration.forms import RegistrationForm
-from django.http import HttpResponseRedirect
-from django.template import RequestContext
-from django import forms as forms
+# -*- coding: utf-8 -*-
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import View
 
-def form(request):
-    form = UserCreationForm()
-    return render_to_response('registration/registration_form.html', {'form': form})
+from djangofirsttouch.utils import render_to
 
-def register(request):
-    form = UserCreationForm()
 
-    if request.method == 'POST':
-        data = request.POST.copy()
-        errors = form.get_validation_errors(data)
-        if not errors:
-            new_user = form.save(data)
-            return HttpResponseRedirect("/account/login")
-    else:
-        data, errors = {}, {}
+class Register(View):
 
-    return render_to_response("registration/registration_complete.html", {
-        'form' : forms.FormWrapper(form, data, errors)
-    })
+    @render_to("registration/registration_form.html")
+    def get(self, request):
+        form = UserCreationForm()
+        return {'form': form}
+
+    @render_to("registration/registration_form.html")
+    def post(self, request):
+        form = UserCreationForm(request.POST.copy())
+
+        if form.is_valid():
+            form.save()
+            return {"redirect": "/account/login"}
+
+        return {'form' : form}
