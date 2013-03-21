@@ -7,5 +7,6 @@ class RegistrationForm(forms.Form):
     username = forms.CharField(label=(u'Username'), max_length = 30)
     password = forms.CharField(label=(u'Password'), max_length = 50)
     fields = ["username", "password", "email"]
+    #ololo
 
 
