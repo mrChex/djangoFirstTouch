@@ -7,3 +7,5 @@ logs
 pids
 src/djangofirsttouch/local_settings.py
 database.sqlite3
+src/djangofirsttouch/static/coffee/node_modules/
+src/djangofirsttouch/static/js/

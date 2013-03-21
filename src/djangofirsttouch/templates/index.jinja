@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Test env</title>
+</head>
+<body>
+    <a href="/"><h1>Hi!</h1></a>
+
+    {% if not request.user.is_authenticated() %}
+        <input type="button" value="login" onclick="location.href='/account/login'">
+        <input type="button" value="register" onclick="location.href='/register'">
+    {% else %}
+        <input type="button" value="logout" onclick="location.href='/account/logout'">
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    <script type="text/javascript" src="/static/js_libs/require.js"></script>
+    <script type="text/javascript" src="/static/js/config.js"></script>
+</body>
+</html>
