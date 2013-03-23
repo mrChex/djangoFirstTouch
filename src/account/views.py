@@ -2,10 +2,12 @@
 from django.views.generic import View
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, get_user_model, SESSION_KEY
-from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.contrib.auth.views import password_change
+from django.contrib.auth.models import User
 
 from djangofirsttouch.utils import render_to
 from account.forms import LoginForm
+from account.forms import ChangePasswordForm
 
 
 class Profile(View):
@@ -46,3 +48,24 @@ class Logout(View):
     def get(self, request):
         auth_logout(request)
         return {"redirect": "/account/login/"}
+
+
+class Pass_change(View):
+
+    @render_to("account/password_change.jinja")
+    def get(self, request):
+        if request.user.is_authenticated():
+            form = ChangePasswordForm()
+            return {'form': form}
+
+    @render_to("account/password_change.jinja")
+    def post(self, request):
+        user = request.user
+        form = ChangePasswordForm(user, request.POST)
+        if form.is_valid():
+            user.set_password(form.cleaned_data["password1"])
+            user.save()
+
+            return {"redirect": "/account/profile"}
+
+        return {'form' : form}
