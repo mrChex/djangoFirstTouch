@@ -60,9 +60,12 @@ class Pass_change(View):
 
     @render_to("account/password_change.jinja")
     def post(self, request):
-        form = ChangePasswordForm(request.user, request.POST)
+        user = request.user
+        form = ChangePasswordForm(user, request.POST)
         if form.is_valid():
-            form.save()
+            user.set_password(form.cleaned_data["password1"])
+            user.save()
+
             return {"redirect": "/account/profile"}
 
         return {'form' : form}
