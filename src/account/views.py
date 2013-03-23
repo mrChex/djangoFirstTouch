@@ -50,7 +50,7 @@ class Logout(View):
         return {"redirect": "/account/login/"}
 
 
-class Pass_change(View):
+class Passchange(View):
 
     @render_to("account/password_change.jinja")
     def get(self, request):

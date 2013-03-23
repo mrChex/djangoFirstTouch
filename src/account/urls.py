@@ -10,6 +10,6 @@ urlpatterns = patterns('',
                        (r'^login/$',  login_views.Login.as_view()),
                        (r'^logout/$', login_views.Logout.as_view()),
                        (r'^profile/', login_views.Profile.as_view()),
-                       (r'^change_pass/', login_views.Pass_change.as_view()),
+                       (r'^change_pass/', login_views.Passchange.as_view()),
                        (r'^blog/', include('blog.urls')),
                        )
