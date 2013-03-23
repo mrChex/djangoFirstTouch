@@ -22,3 +22,41 @@ class LoginForm(forms.Form):
             return password
         else:
             raise forms.ValidationError("Wrong password")
+
+
+class UserForm(forms.Form):
+
+    def __init__(self, user=None, *args, **kwargs):
+        self.user = user
+        super(UserForm, self).__init__(*args, **kwargs)
+
+
+class ChangePasswordForm(UserForm):
+
+    oldpassword = forms.CharField(label=("Current Password"))
+    password1 = forms.CharField(label=("New Password"))
+    password2 = forms.CharField(label=("New Password (again)"))
+
+
+    def get_user(self ,user):
+        user = User.get_username()
+        return user
+
+
+    def clean_oldpassword(self):
+
+        if not self.user.check_password(self.cleaned_data.get("oldpassword")):
+            raise forms.ValidationError("Please type your current password.")
+        return self.cleaned_data["oldpassword"]
+    print "old"
+
+    def clean_password2(self):
+        if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
+            if self.cleaned_data["password1"] != self.cleaned_data["password2"]:
+                raise forms.ValidationError("You must type the same password each time.")
+        return self.cleaned_data["password2"]
+    print "pass2"
+    def save(self):
+        self.user.set_password(self.cleaned_data["password1"])
+        self.user.save()
+        print "save"
