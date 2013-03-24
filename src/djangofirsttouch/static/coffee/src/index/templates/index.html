@@ -1,0 +1,10 @@
+<h1>Index Page!</h1>
+
+<div id="index-newsWrapper">
+    <% _.each(news, function(model) { item = model.attributes; %>
+
+        <h2><%=item.title%></h2>
+        <span><%=item.text%></span>
+
+    <% }); %>
+</div>

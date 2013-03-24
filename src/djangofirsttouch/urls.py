@@ -9,6 +9,7 @@ from splash import views as splash_views
 urlpatterns = patterns('',
                        url(r'^$', splash_views.Splash.as_view()),
                        (r'^account/', include('account.urls')),
+                       (r'^news', include('news.urls')),
                        #Uncomment the next line to enable the admin:
                        #(r'^admin/', include(admin.site.urls)),
                        url(r'^register/$', registration_views.Register.as_view())
