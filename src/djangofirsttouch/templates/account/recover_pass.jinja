@@ -1,15 +1,13 @@
 {% extends "index.jinja" %}
 {% block content %}
-    <div>
-        Привет, {{ request.user }}.
-    </div>
 
     <form action='.' method='post'>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
         {{ form }}
 
-        <input type="submit" value="e-mail" />
+        <input type="submit" value="Recover Password" />
         <input type="hidden" name="next" value="{{ next|escape }}" />
     </form>
+
 {% endblock %}

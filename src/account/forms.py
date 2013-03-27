@@ -49,3 +49,9 @@ class ChangePasswordForm(forms.Form):
             raise forms.ValidationError("You must type the same password each time.")
 
         return self.cleaned_data["password2"]
+
+
+class EmailForm(forms.Form):
+    email = forms.EmailField(label=(u'E-mail'), max_length = 50)
+
+
