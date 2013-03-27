@@ -8,9 +8,11 @@
     {% if not request.user.is_authenticated() %}
         <input type="button" value="login" onclick="location.href='/account/login'">
         <input type="button" value="register" onclick="location.href='/register'">
+        <input type="button" value="recover_pass" onclick="location.href='/account/recover_pass'">
     {% else %}
         <input type="button" value="logout" onclick="location.href='/account/logout'">
         <input type="button" value="change_pass" onclick="location.href='/account/change_pass'">
+        <input type="button" value="profile" onclick="location.href='/account/profile'">
     {% endif %}
 
     {% block content %}
