@@ -93,21 +93,28 @@ class Recover(View):
     @render_to("account/recover_pass.jinja")
     def get(self, request):
         form = PasswordResetForm()
-        return {'form': form}
+        error = request.GET['error'] if 'error' in request.GET else False
+        return {'form': form,
+                'error': error}
 
+    @render_to("json")
     def post(self, request):
-        form = PasswordResetForm(request.POST.copy())
-        subject = 'Password recovery'
-        body = 'Hi %s,Your password is: %s. You can change it when loggined in.'
-        user = request.user.username
         email = request.POST['email']
-        user = User.objects.get(email=email)
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return {"redirect": "?error=userDoesNotExist"}
         size = 6
+
         chars = string.ascii_uppercase + string.digits
         password = ''.join(random.choice(chars) for x in range(size))
+
+        subject = 'Password recovery'
+        body = 'Hi %s,Your password is: %s. You can change it when loggined in.' % (user.username, password)
+
         user.set_password(password)
         user.save()
-        send_mail(subject, body % (user, password), DEFAULT_FROM_EMAIL,
+        send_mail(subject, body, DEFAULT_FROM_EMAIL,
                   [email], fail_silently=False)
 
-        return {'redirect': "/"}
+        return {'redirect': "?error=none"}

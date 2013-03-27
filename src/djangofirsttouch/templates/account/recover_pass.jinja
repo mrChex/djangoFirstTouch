@@ -1,13 +1,21 @@
 {% extends "index.jinja" %}
 {% block content %}
 
-    <form action='.' method='post'>
-        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    {% if error == "userDoesNotExist" %}
+        <font color=red>Пользователь с таким E-mail не найден</font>
+    {% else %}
+        {% if not error %}
+            <form action='.' method='post'>
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
-        {{ form }}
+                {{ form }}
 
-        <input type="submit" value="Recover Password" />
-        <input type="hidden" name="next" value="{{ next|escape }}" />
-    </form>
+                <input type="submit" value="Recover Password" />
+                <input type="hidden" name="next" value="{{ next|escape }}" />
+            </form>
+        {% else %}
+            Новый пароль и инструкции были отправленны на ваш e-mail
+        {% endif %}
+    {% endif %}
 
 {% endblock %}
